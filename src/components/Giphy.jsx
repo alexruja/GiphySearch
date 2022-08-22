@@ -6,21 +6,22 @@ function Giphy() {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      const results = await axios("https://api.giphy.com/v1/gifs/trending", {
-        params: {
-          api_key: "6UflaNASKuLEcTO7FRFau1VRKibvvljB",
-          limit: "10",
-        },
-      });
-      console.log(results);
-      setData(results.data.data);
-      setIsLoading(false);
-    };
-    fetchData();
-  }, []);
+  
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setIsLoading(true);
+  //     const results = await axios("https://api.giphy.com/v1/gifs/trending", {
+  //       params: {
+  //         api_key: "6UflaNASKuLEcTO7FRFau1VRKibvvljB",
+  //         limit: "10",
+  //       },
+  //     });
+  //     console.log(results);
+  //     setData(results.data.data);
+  //     setIsLoading(false);
+  //   };
+  //   fetchData();
+  // }, []);
 
   const renderGifs = () => {
     if (isLoading) {
@@ -45,6 +46,7 @@ function Giphy() {
     const results = await axios("https://api.giphy.com/v1/gifs/search", {
       params: {
         api_key: "6UflaNASKuLEcTO7FRFau1VRKibvvljB",
+        limit: "10",
         q: search,
       },
     });
