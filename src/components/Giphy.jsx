@@ -6,6 +6,7 @@ function Giphy() {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [id, setId] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,9 +51,16 @@ function Giphy() {
         q: search,
       },
     });
+    setId(id + 1);
     setData(results.data.data);
     setIsLoading(false);
+    
   };
+
+
+  useEffect(()=> {
+    window.localStorage.setItem(`search ID ${id}`, JSON.stringify(search));
+  },[search])
 
   return (
     <Fragment>
@@ -65,9 +73,12 @@ function Giphy() {
           value={search}
         />
         <button onClick={handleSubmit} type="submit" className="btn">
-            Submit
+          Submit
         </button>
       </form>
+      <p>
+        10 GIF's available for: <b>{search}</b>
+      </p>
       <div className="container gifs">{renderGifs()}</div>
     </Fragment>
   );
