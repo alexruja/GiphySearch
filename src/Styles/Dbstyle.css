@@ -1,0 +1,32 @@
+.dbhistory { 
+    margin: 3rem auto;
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: 5px white solid;
+    box-shadow: 10px 10px #326273;
+    border-radius: 10px;
+}
+
+.dbhistory h4 {
+    text-shadow: 1px 1px #326273;
+}
+
+.dbel{
+    color: white;
+    margin: 0 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-shadow: 1px 1px #326273;
+}
+
+.dbhistory:hover {
+    transform: scale(1.075);
+    transition: 0.3s ease-in;
+    border: 8px #326273 solid;
+    background-color: #5c9ead;
+    -webkit-box-shadow: 0px 10px 13px -7px #326273, 0px 0px 50px 18px;
+    box-shadow: 0px 10px 13px -7px #326273, 0px 0px 50px 18px #326273;
+}

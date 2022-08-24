@@ -6,11 +6,14 @@ import { collection, getDocs, addDoc } from "firebase/firestore";
 
 function Giphy() {
   const [data, setData] = useState([]);
+  const [para, setPara] = useState("These are the top 10 trending gifs");
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [id, setId] = useState(0);
-  // const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState([]);
   const historyCollectionRef = collection(db, "history");
+
+  // Fetching the top 10 trending gifs
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +31,8 @@ function Giphy() {
     fetchData();
   }, []);
 
+  // Rendering the gifs
+
   const renderGifs = () => {
     if (isLoading) {
       return <Loader></Loader>;
@@ -41,9 +46,13 @@ function Giphy() {
     });
   };
 
+  // Searching the input value
+
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
   };
+
+  // Handling the submit button to send the value to the api
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,27 +64,37 @@ function Giphy() {
         q: search,
       },
     });
+
+    //Creating the document for the search input
+
     const createSearchHistory = async () => {
       await addDoc(historyCollectionRef, { searchHistory: search });
     };
     createSearchHistory();
+
+    //Setting the ID counter for the local storage, loading the data and changing the paragraph
+
     setId(id + 1);
     setData(results.data.data);
     setIsLoading(false);
+    setPara(`10 GIF's available for: ${search}`);
   };
+
+  // Saving the data in the local storage with a search ID
 
   useEffect(() => {
     window.localStorage.setItem(`search ID ${id}`, JSON.stringify(search));
   }, [search]);
 
-  // useEffect(() => {
-  //   const getHistory = async () => {
-  //     const data = await getDocs(historyCollectionRef);
-  //     setHistory(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  //   };
+  //Hook to showcase the database history
+  useEffect(() => {
+    const getHistory = async () => {
+      const data = await getDocs(historyCollectionRef);
+      setHistory(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
 
-  //   getHistory();
-  // }, []);
+    getHistory();
+  }, []);
 
   return (
     <Fragment>
@@ -91,15 +110,18 @@ function Giphy() {
           Submit
         </button>
       </form>
-      <p>
-        10 GIF's available for: <b>{search}</b>
-      </p>
+      <p>{para}</p>
       <div className="container gifs">{renderGifs()}</div>
-            {/* {history.map((el) => {
-        return <div>
-          <h1>Searched: {el.searchHistory}</h1>
-        </div>;
-      })} */}
+      <div className="dbhistory">
+        <h4>DATABASE HISTORY:</h4>
+      {history.map((el) => {
+        return (
+          <div className="dbel">
+            <h4>{el.searchHistory}</h4>
+          </div>
+        );
+      })}
+      </div>
     </Fragment>
   );
 }

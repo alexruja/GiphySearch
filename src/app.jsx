@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Giphy from "./Components/Giphy";
 import "./Styles/App.css";
 import "./Styles/Form.css";
 import "./Styles/Loader.css";
+import "./Styles/Dbstyle.css";
 
 const App = () => {
 
