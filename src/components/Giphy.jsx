@@ -78,7 +78,14 @@ function Giphy() {
     setId(id + 1);
     setData(results.data.data);
     setIsLoading(false);
-    setPara(`10 GIF's available for: ${search}`);
+    
+    if(search.length === 0) {
+      setPara("Search bar is empty!")
+    } else if (results.data.data.length === 0){
+      setPara('There are no gifs found!');
+    } else {
+      setPara(`${results.data.data.length} GIF's available for: ${search}`);
+    }
   };
 
   // Saving the data in the local storage with a search ID
@@ -88,6 +95,7 @@ function Giphy() {
   }, [search]);
 
   //Hook to showcase the database history
+
   useEffect(() => {
     const getHistory = async () => {
       const data = await getDocs(historyCollectionRef);
@@ -115,7 +123,7 @@ function Giphy() {
       <div className="container gifs">{renderGifs()}</div>
       <LogoLoader></LogoLoader>
       <div className="container dbhistory">
-        <h4>DATABASE HISTORY:</h4>
+        <h4>DATABASE SEARCH HISTORY:</h4>
         {history.map((el) => {
           return (
             <div className="dbel">
