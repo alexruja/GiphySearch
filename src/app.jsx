@@ -4,6 +4,7 @@ import "./Styles/App.css";
 import "./Styles/Form.css";
 import "./Styles/Loader.css";
 import "./Styles/Dbstyle.css";
+import './Styles/LogoLoader.css';
 
 const App = () => {
 

@@ -2,6 +2,7 @@ body {
   background-color: #eeeeee;
   background-image: linear-gradient(#5c9ead, #e39774);
   font-family: "Silkscreen", cursive;
+  min-height: 1000px;
 }
 
 .gifs {

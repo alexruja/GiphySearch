@@ -1,6 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
 import axios from "axios";
 import Loader from "./Loader";
+import LogoLoader from "./LogoLoader";
 import { db } from "./firebase-config";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 
@@ -112,15 +113,16 @@ function Giphy() {
       </form>
       <p>{para}</p>
       <div className="container gifs">{renderGifs()}</div>
-      <div className="dbhistory">
+      <LogoLoader></LogoLoader>
+      <div className="container dbhistory">
         <h4>DATABASE HISTORY:</h4>
-      {history.map((el) => {
-        return (
-          <div className="dbel">
-            <h4>{el.searchHistory}</h4>
-          </div>
-        );
-      })}
+        {history.map((el) => {
+          return (
+            <div className="dbel">
+              <h4>{el.searchHistory}</h4>
+            </div>
+          );
+        })}
       </div>
     </Fragment>
   );
