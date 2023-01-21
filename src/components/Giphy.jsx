@@ -30,7 +30,7 @@ function Giphy() {
       setIsLoading(false);
     };
     fetchData();
-  }, []);
+  },[]);
 
   // Rendering the gifs
 
@@ -78,11 +78,11 @@ function Giphy() {
     setId(id + 1);
     setData(results.data.data);
     setIsLoading(false);
-    
-    if(search.length === 0) {
-      setPara("Search bar is empty!")
-    } else if (results.data.data.length === 0){
-      setPara('There are no gifs found!');
+
+    if (search.length === 0) {
+      setPara("Search bar is empty!");
+    } else if (results.data.data.length === 0) {
+      setPara("There are no gifs found!");
     } else {
       setPara(`${results.data.data.length} GIF's available for: ${search}`);
     }
